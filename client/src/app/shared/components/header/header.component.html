@@ -1,0 +1,83 @@
+<header>
+
+  <!--Navbar-->
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-md navbar-dark scrolling-navbar {{navClass}}" [containerInside]="false">
+    <!-- Navbar brand -->
+    <logo>
+      <a class="navbar-brand" href="javascript:void(0);" (click)="goTo('/')">
+        <img class="nav-logo" [src]="logoPath" alt="">
+      </a>
+    </logo>
+    <!-- Collapsible content -->
+    <links *ngIf="isLoggedIn | async; else notLoggedIn">
+      <!-- Links -->
+      <ul class="navbar-nav ml-auto">
+          <!-- <li class="nav-item">
+            <a class="nav-link" (click)="goTo('/')">Home</a>
+          </li> -->
+          <li class="nav-item">
+            <!-- <a class="nav-link" (click)="goTo('/shop')">Shop</a> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="goTo('invoices')">Invoices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="goTo('payment')">Wallets</a>
+          </li>
+          <li class="nav-item avatar dropdown" dropdown *ngIf="isLoggedIn && user">
+            <a dropdownToggle type="button" class="nav-link dropdown-toggle">
+              <img src="{{user.photo}}" class="img-fluid rounded-circle z-depth-0 account-logo">
+              <span class="caret"></span>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+            <a class="dropdown-item" (click)="goTo('account/profile')">Account</a>
+            <a class="dropdown-item" (click)="goTo('contacts')">Contacts</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item" href="mailto:hello@gilded.finance">
+              <i class="fa fa-question mr-1"></i> Support
+            </a>
+            <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" (click)="signOut()">
+                <i class="fa fa-lock mr-1"></i> Sign Out
+              </a>
+            </div>
+          </li>
+      </ul>
+      <!-- Links -->
+
+      <!-- Search form -->
+      <!--<form class="form-inline ">-->
+        <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+      <!--</form>-->
+    </links>
+
+    <ng-template #notLoggedIn>
+        <links>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/GildedFinance" title="Twitter"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://medium.com/gilded" title="Medium"><i class="fa fa-medium"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://facebook.com/GildedFinance" title="Facebook"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://t.me/GildedFinance" title="Telegram"><i class="fa fa-telegram"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-sm btn-rounded btn-dark nav-link-btn-primary" routerLink="/auth/login">
+                <i class="fa fa-arrow-right">&nbsp;</i>
+                  Sign In
+              </a>
+            </li>
+          </ul>
+      </links>
+    </ng-template>
+
+    <!-- Collapsible content -->
+
+  </mdb-navbar>
+  <!--/.Navbar-->
+</header>

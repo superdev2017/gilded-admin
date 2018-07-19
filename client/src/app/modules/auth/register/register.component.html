@@ -1,0 +1,85 @@
+<app-header [navClass]="'transparent'"></app-header>
+
+<main class="bg-gold">
+  <section>
+    <div class="container register">
+      <div class="row justify-content-md-center mt-4">
+        <div class="col-md-7">
+          <!--Panel-->
+          <div class="card mt-2">
+            <div class="card-header bold bg-light">
+              {{title}}
+            </div>
+            <div class="card-body">
+              <p class="text-center" *ngIf="errors && errors.length">
+                <span class="badge error" *ngFor="let error of errors;">{{error}}</span>
+              </p>
+              <!-- Register Form -->
+              <!-- Login form -->
+              <form [formGroup]="registerForm" class="md-form" (ngSubmit)="registerAccount()">
+                <div class="md-form">
+                  <i class="fa fa-user prefix grey-text"></i>
+                  <input type="text" id="name" class="form-control" formControlName="name" mdbActive>
+                  <label for="name">Name/Company</label>
+                </div>
+
+                <div class="md-form">
+                  <i class="fa fa-id-badge prefix grey-text"></i>
+                  <input type="text" class="form-control" formControlName="username" mdbActive id="username" validate>
+                  <label for="username">Username</label>
+                  <div class="alert alert-danger" *ngIf="registerForm.get('username').errors?.taken">
+                      😢 Oh noes, this username is already taken!
+                  </div>                  
+                </div>
+                <!-- email -->
+                <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="text" id="email" class="form-control" formControlName="email" mdbActive>
+                  <label for="email">Email</label>         
+                  <div class="alert alert-danger" *ngIf="registerForm.controls.email.errors?.taken">
+                      😢 Oh noes, this email is already taken!
+                  </div>                  
+                </div>
+
+                <!-- password -->
+                <div class="md-form" *ngIf="!isGoogleAccount">
+                  <i class="fa fa-lock prefix grey-text"></i>
+                  <input type="password" id="password" class="form-control" formControlName="password" mdbActive>
+                  <label for="password">Password</label>
+                </div>
+
+                <!--<div class="md-form">-->
+                  <!--<i class="fa fa-globe prefix grey-text"></i>-->
+                  <!--<input type="text" id="website" class="form-control" formControlName="website" mdbActive -->
+                    <!--pattern="https?://.+" title="Include http://"-->
+                    <!--placeholder="http://www.website.com">-->
+                  <!--<label for="website">Website</label>-->
+                <!--</div>-->
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-rounded btn-primary waves-light" mdbRippleRadius [disabled]="!registerForm.valid">
+                    <span *ngIf="isGoogleAccount; else signUp">Finish Signup</span>                    
+                    <ng-template #signUp>Sign up</ng-template>
+                  </button>
+                  <button *ngIf="!isGoogleAccount" type="button" class="btn btn-rounded btn-dark waves-light" mdbRippleRadius (click)="signUpWithGoogle()">
+                    <i class="fa fa-google"></i> Sign up With Google
+                  </button>
+                </div>
+              </form>
+              <!-- Login form -->
+            </div>
+            <div class="card-footer" *ngIf="!isGoogleAccount">
+              <p>Already have an account? <a (click)="signIn()">Sign in now</a></p>
+            </div>
+            <div class="card-footer" *ngIf="isGoogleAccount">
+              <p>Do you want to sign out from google acoount? <a (click)="signOut()">Sign Out</a></p>
+            </div>
+          </div>
+          <!--/.Panel-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>

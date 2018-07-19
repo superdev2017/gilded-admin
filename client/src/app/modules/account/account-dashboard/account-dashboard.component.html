@@ -1,0 +1,39 @@
+<main>
+  <section *ngIf="user">
+    <div class="container account">
+      <div class="row justify-content-md-center">
+        <div class="col-md-9">
+
+          <!--Card-->
+          <div class="card testimonial-card rounded">
+
+            <!--Background color-->
+            <div class="card-up bg-dark">
+            </div>
+
+            <!--Avatar-->
+            <div class="avatar">
+              <!--src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg"-->
+              <img src="{{user_avatar}}" class="rounded-circle">
+            </div>
+
+            <div class="card-body">
+              <!--Name-->
+              <h4 class="card-title">{{user.displayName}}</h4>
+              <hr>
+              <!--Quotation-->
+              <p class="text-left"><i class="fa fa-envelope"></i> Email: {{user.email}}</p>
+              <p class="text-left"><i class="fa fa-phone"></i> Phone: {{user.phoneNumber}}</p>
+            </div>
+
+            <div class="card-footer text-center">
+              <button type="button" class="btn btn-gold-rounded waves-light" mdbRippleRadius (click)="signOut()">Sign Out</button>
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,113 @@
+.widget {
+  .card-title {
+    font-weight: bold;
+  }
+  .card-body {
+    background-color: #fff;
+  }
+  .flex-row {
+    align-items: baseline;
+  }
+
+  .invoice .card-body button {
+    width: 200px;
+  }
+
+  .search-btn {
+    width: 150px;
+  }
+  .search-input {
+    margin-bottom: 0;
+    height: 1.3rem;
+    border-radius: 5px;
+    background-color: #616161;
+    color: #fff;
+    text-indent: 10px;
+
+    &::placeholder {
+      color: #fff;
+      padding-left: 10px;
+    }
+
+    &:focus {
+      &::placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  // search input
+  .search {
+    position: relative;
+    margin-right: 20px;
+  }
+  .search .fa-search {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+
+  &.spend {
+    .card-body {
+      .location-label {
+        margin-right: 15px;
+      }
+      .row.location-item {
+        border: 0.5px solid #e4e0e0;
+        padding: 10px;
+
+        .business-name {
+          font-weight: bold;
+        }
+        .address,
+        .mobile,
+        .web,
+        .map-link {
+          font-size: 0.8rem;
+        }
+        .map-link {
+          padding-left: 10px;
+          padding-top: 20px;
+        }
+      }
+
+      .search-input {
+        min-width: 300px;
+      }
+    }
+
+    .search-location {
+      cursor: pointer;
+    }
+  }
+
+  &.learn {
+    .card-body {
+      .row.blog-item {
+        border: 0.5px solid #e4e0e0;
+        padding: 10px;
+
+        .article-name {
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
+
+.card-body span.img {
+  background-size: 100% 100%;
+  width: 60%;
+  height: 150px;
+  margin-bottom: 5%;
+}
+
+.invoice .card-body span.img {
+  background-image: url('/assets/images/illustrations/invoice_d.png');
+}
+
+.shop .card-body span.img {
+  background-image: url('/assets/images/illustrations/shop_d.png');
+}

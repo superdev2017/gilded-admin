@@ -1,0 +1,35 @@
+@import 'scss/gold';
+
+img.icon-currency {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-block;
+  color: #fff !important;
+}
+
+.datatable-row-detail {
+  .table {
+    color: #000;
+  }
+  .table thead {
+    font-weight: bold;
+  }
+
+  .table td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+.share-url {
+  font-size: 15px;
+}
+
+a.fa {
+  color: $dark-color;
+  font-size: 18px;
+}
+.price-discount {
+  text-decoration: line-through;
+}

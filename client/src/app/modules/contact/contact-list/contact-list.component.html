@@ -1,0 +1,131 @@
+<create-client [show]="showCreateContact" (onHide)="onHideCreateContact($event)"></create-client>
+
+<main>
+    <section>
+        <div class="container-fluid content-padding">
+    
+          <div class="d-flex justify-content-end">
+            <div class="mr-auto p-2 btn-group">
+              <h1>Contacts</h1>
+            </div>
+            <div class="p-2">
+              <button class="btn btn-md btn-rounded btn-primary" (click)="showCreateContact = true">
+                <i class="fa fa-plus mr-2"></i> Add Contact
+              </button>
+            </div>
+          </div>
+
+          <!-- grid -->
+          <div class="row mt-3">
+              <div class="col-md-12">
+                <ngx-datatable
+                    #contactsTable
+                    class='material expandable rounded'
+                    [rows]="rows | async"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="40"
+                    [rowHeight]="40">
+      
+                  <!-- Row Detail Template -->
+                  <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow>
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-end flex-row">                          
+                            <a  *ngIf="!editMode"
+                                title="Edit Contact" (click)="editContact(row)">
+                              <i class="fa fa-pencil mr-2"></i>
+                            </a>
+                            
+                            <a  *ngIf="editMode"
+                                title="Save Contact" (click)="saveContact(row)">
+                              <i class="fa fa-save mr-2"></i>
+                            </a>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4 d-flex flex-column">
+                                <div class="info">
+                                  <span class="label">Fullname:</span>
+                                  <span *ngIf="!editMode;" class="value">{{row.name}}</span>
+                                  <input *ngIf="editMode;" class="form-control" type="text" [(ngModel)]="row.name">
+                                </div>
+                                <div class="info">
+                                  <span class="label">Email:</span>
+                                  <span *ngIf="!editMode;" class="value">{{row.email}}</span>
+                                  <input *ngIf="editMode;" class="form-control" type="text" [(ngModel)]="row.email">
+                                </div>
+                              </div>
+    
+                              <div class="col-md-8 d-flex flex-column" *ngIf="user.plan == 'paid'">
+                                <div class="info">
+                                  <span class="label">Ethereum address for ID:</span>
+                                  <span *ngIf="!editMode;" class="value">{{row.eth_address_id}}</span>
+                                  <input *ngIf="editMode;" class="form-control" type="text" [(ngModel)]="row.eth_address_id">
+                                </div>
+                                <div class="info">
+                                  <span class="label">Ethereum address for payments:</span>
+                                  <span *ngIf="!editMode;" class="value">{{row.eth_address_payment}}</span>
+                                  <input *ngIf="editMode;" class="form-control" type="text" [(ngModel)]="row.eth_address_payment">
+                                </div>
+                              </div>
+                          </div>                          
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-row-detail>
+      
+                  <!-- Column Templates -->
+                  <ngx-datatable-column
+                    [flexGrow]="1"
+                      [width]="30"
+                      [resizeable]="false"
+                      [sortable]="false"
+                      [draggable]="false"
+                      [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                      <a
+                          href="javascript:void(0)"
+                          [class.datatable-icon-right]="!expanded"
+                          [class.datatable-icon-down]="expanded"
+                          title="Expand/Collapse Row"
+                          (click)="toggleExpandRow(row)">
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+      
+                  <ngx-datatable-column name="Name" prop="name" [width]="80" [flexGrow]="1">
+                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                      <strong>{{value}}</strong>
+                    </ng-template>
+                  </ngx-datatable-column>
+      
+                  <ngx-datatable-column name="Email" prop="email" [width]="100" [flexGrow]="2">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                      <strong>{{value}}</strong>
+                    </ng-template>
+                  </ngx-datatable-column>
+      
+                  <ngx-datatable-column
+                      name="Actions"
+                      [width]="100"
+                      [resizeable]="false"
+                      [sortable]="false"
+                      [draggable]="false"
+                      [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                      <a  href="javascript:void(0)"
+                          title="Remove Contact"
+                          (click)="removeContact(row)">
+                        <i class="fa fa-trash mr-2"></i>
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+          </div>
+
+        </div>  
+      </section>
+</main>
+  

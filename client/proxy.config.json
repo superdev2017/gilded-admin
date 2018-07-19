@@ -1,0 +1,11 @@
+{
+  "/api" : {
+    "target": "https://us-central1-gilded-dev.cloudfunctions.net",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

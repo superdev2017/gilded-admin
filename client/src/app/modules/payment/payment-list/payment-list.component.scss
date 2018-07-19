@@ -1,0 +1,36 @@
+@import 'scss/gold';
+
+.payment-details {
+  padding: 20px;
+}
+
+.info {
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #f3eded;
+
+  span {
+    display: block;
+    width: 100%;
+  }
+
+  span.label {
+    font-weight: bold;
+    padding-right: 10px;
+  }
+
+  span.action {
+    padding-top: 10px;
+    cursor: pointer;
+    float: right;
+    font-style: italic;
+    font-size: 10pt;
+    color: $gold-color;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
+  }
+}
+
+.fa-trash {
+  color: $dark-color;
+  font-size: 18px;
+}

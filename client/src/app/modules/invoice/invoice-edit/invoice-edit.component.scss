@@ -1,0 +1,121 @@
+@import 'scss/gold';
+
+.notes-form {
+  border-top: 1px solid #efeeee;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+.row-actions-td {
+  display: flex;
+}
+.remove-item {
+  color: #fff;
+  border-radius: 100%;
+  font-size: 0.8rem;
+}
+.row-actions-td > button {
+  margin: 0;
+}
+.items-table tr td input[type='number'] {
+  text-align: right;
+}
+.items-table tr td input[type='number'] {
+  text-align: right;
+}
+.table-striped {
+  td {
+    border-top: 0;
+  }
+  tbody tr:nth-of-type(odd) {
+    background-color: $light-color;
+    border-top: 0;
+  }
+}
+.subtotal,
+.tax,
+.amount_due {
+  display: flex;
+  align-items: center;
+
+  span:nth-child(1) {
+    width: 150px;
+    font-weight: bold;
+  }
+  span:nth-child(2) {
+    width: 150px;
+  }
+  span:nth-child(2) input {
+    text-align: right;
+  }
+}
+input.gold-rounded {
+  max-width: 100px;
+}
+.search_list {
+  display: none;
+  margin-top: 5px;
+  margin-left: 50px;
+  max-height: 100px;
+  overflow-y: auto;
+
+  .search_ul {
+    list-style-type: none;
+    list-style-position: inside;
+    padding-left: 0;
+
+    li {
+      span {
+        color: #000;
+      }
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    li:nth-child(even) {
+      background-color: #f5f5f5;
+      &:hover {
+        span {
+          color: #ffa600;
+        }
+      }
+    }
+
+    li:nth-child(odd) {
+      background-color: #ffa600;
+      &:hover {
+        span {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+.invoice-status {
+  padding: 10px;
+}
+.title-form,
+.client-form {
+  margin-bottom: 2.2rem;
+}
+div.mdb-datepicker {
+  width: 45%;
+  margin-left: 50px !important;
+}
+.mdb-select {
+  padding-left: 50px;
+  color: #818181;
+}
+.item-qty,
+.item-amount,
+.item-unit {
+  float: right;
+}
+.item-qty {
+  max-width: 60px;
+}
+.item-unit {
+  max-width: 80px;
+}
+.item-amount {
+  max-width: 120px;
+}

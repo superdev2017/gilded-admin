@@ -1,0 +1,69 @@
+@import 'scss/gold';
+
+.payment-nano {
+  margin-left: 25%;
+  padding-top: 50px;
+}
+
+.payment-data {
+  .title {
+    display: block;
+  }
+  .price,
+  .txhash {
+    margin-top: 10px;
+    span {
+      background-color: $light-color;
+      display: block;
+      font-weight: 500;
+      font-size: 18px;
+      padding: 10px;
+    }
+    .btn-flat {
+      padding: 2px;
+      .fa {
+        color: $dark-color !important;
+      }
+    }
+
+    .wallet-address {
+      font-size: 13px;
+      overflow: auto;
+    }
+  }
+}
+
+.crypto-button {
+  background-color: $light-color;
+  color: $dark-color !important;
+  .crypto-title {
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  .fa-question-circle {
+    color: $dark-color !important;
+    font-size: 35px;
+  }
+  .learn-more {
+    text-transform: none;
+  }
+}
+
+.crypto-button span {
+  display: block;
+}
+
+.invoice-total {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.modal-footer {
+  .btn-flat {
+    padding-left: 0;
+  }
+  .fa {
+    color: $dark-color !important;
+  }
+}

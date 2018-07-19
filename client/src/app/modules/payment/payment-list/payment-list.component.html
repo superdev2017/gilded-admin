@@ -1,0 +1,178 @@
+<!-- show payment new option if is defined cloudUser -->
+<payment-new *ngIf="cloudUser" [show]="showPaymentOptionModal" [cloudUser]="cloudUser"
+             (onHide)="showPaymentOptionModal=$event"></payment-new>
+
+<main>
+  <section>
+    <div class="container-fluid content-padding">
+
+      <div class="d-flex justify-content-end">
+        <div class="mr-auto p-2 btn-group">
+          <h1>Wallets</h1>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-md btn-rounded btn-dark mr-2" routerLink="/invoices">
+            <i class="fa fa-arrow-left mr-2"></i> Return to Invoices
+          </button>
+          <button class="btn btn-md btn-rounded btn-primary" (click)="addNewOption()">
+            <i class="fa fa-plus mr-2"></i> Add Wallet
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <ngx-datatable
+              #paymentOptionsTable
+              class='material expandable rounded'
+              [rows]="rows | async"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="50">
+
+
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow>
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div class="card payment-details">
+                  <div class="row">
+                    <div class="col-sm-3 align-items-sm-center">
+                      <qrcode [qrdata]="row.public_key" [size]="128" [level]="'M'"></qrcode>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="row info">
+                        <span class="label">Public Wallet Address:</span>
+                        <span class="value">{{row.public_key}}</span>
+                        <span class="action accent" title="Copy Account Address" (click)="copyAddress(row.public_key)">
+                          <i class="fa fa-copy"></i>
+                          Copy Account Address
+                        </span>
+                      </div>
+                      <!--<div class="row info">-->
+                      <!--<span class="label">Balance:</span>-->
+                      <!--<span class="value">{{0.00 | number: '1.2'}}</span>-->
+                      <!--</div>-->
+                    </div>
+                    <div class="col-sm-4">&nbsp;</div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+
+            <!-- Column Templates -->
+            <ngx-datatable-column
+                [width]="30"
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                    href="javascript:void(0)"
+                    [class.datatable-icon-right]="!expanded"
+                    [class.datatable-icon-down]="expanded"
+                    title="Expand/Collapse Row"
+                    (click)="toggleExpandRow(row)">
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Currency" prop="currency_name" [width]="50">
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <strong>{{value}}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Public Wallet Address" prop="public_key" [width]="400">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{value}}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Date Added" prop="created_at" [width]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{value | date: 'medium'}}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+                [width]="50"
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                    href="javascript:void(0)"
+                    title="Remove Option"
+                    (click)="removeOption(row)">
+                  <i class="fa fa-trash mr-4"></i>
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+
+        <div class="text-center mt-4" style="width: 100%">
+          <button class="btn btn-flat" (click)="gettingStarted.toggle()" mdbRippleRadius>Need help adding a wallet?
+          </button>
+        </div>
+      </div>
+
+      <!--Panel-->
+      <div class="" [mdbCollapse]="gettingStarted" #gettingStarted="bs-collapse">
+        <div class="card mt-4">
+          <div class="card-header bg-accent">
+            How to receive cryptocurrency payments
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Setup your first Bitcoin and Ethereum wallet</h4>
+            <div class="card-text">
+              <b>Bitcoin</b> and <b>Ethereum</b> are the two most widely supported cryptocurrencies.
+              <br><br>
+              To receive payment in Bitcoin or Ethereum you'll need a software application called a <i>wallet</i>.
+              Gilded recommends <b>Coinbase</b> as a safe,
+              simple, and convenient Bitcoin and Ethereum wallet for beginners.
+              <br><br>
+
+              <a href="https://www.coinbase.com/join/531517808a78e38b600002c2" target="_blank"
+                 class="btn btn-dark btn-rounded btn-sm mt-0">
+                Sign up for a free Coinbase account
+              </a>
+
+              <br><br>
+
+              Once you've created a Coinbase account, follow these steps to add your wallet to Gilded:
+
+              <ol>
+                <li>In Coinbase:
+                  <ol>
+                    <li>Click the <i>Accounts</i> tab</li>
+                    <li>Click the orange Bitcoin <i>My Wallet</i> button</li>
+                    <li>Click <i>Receive</i></li>
+                    <li>Click <i>Show Address</i></li>
+                    <li>Click the button on the right to copy the deposit address for your Bitcoin wallet</li>
+                  </ol>
+                </li>
+                <li>In Gilded:
+                  <ol>
+                    <li>Click the <i>Add Wallet</i> button above
+                    <li>Select Bitcoin, and paste in your wallet address</li>
+                    <li>Verify that your Bitcoin wallet address is accurate by comparing the first few and last few
+                      characters
+                      to the page on Coinbase
+                    </li>
+                  </ol>
+                </li>
+                <li>Repeat these steps for the Ethereum/ETH Wallet in Coinbase (if desired)</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.Panel-->
+
+    </div>
+  </section>
+</main>

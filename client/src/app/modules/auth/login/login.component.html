@@ -1,0 +1,91 @@
+<app-header [navClass]="'transparent'"></app-header>
+
+<main class="bg-gold">
+  <section>
+    <div class="container login">
+      <div class="row justify-content-md-center mt-4">
+        <div class="col-md-7">
+          <!--Login Panel-->
+          <div class="card mt-2" *ngIf="(step == 'login')">
+            <div class="card-header bold bg-light">
+              Login
+            </div>
+            <div class="card-body">
+              <!-- Login form -->
+              <form  method="post" #formCtrl="ngForm">
+                <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="text" id="defaultForm-email" class="form-control" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" mdbActive>
+                  <label for="defaultForm-email">Your email</label>
+                </div>
+
+                <div class="md-form">
+                  <i class="fa fa-lock prefix grey-text"></i>
+                  <input type="password" id="defaultForm-pass" class="form-control" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" mdbActive>
+                  <label for="defaultForm-pass">Your password</label>
+                </div>
+
+                <div class="alert alert-dismissible alert-danger text-center" *ngIf="error">
+                  {{error}}
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn btn-primary btn-rounded waves-light" [disabled]="(!user.email || !user.password)" mdbRippleRadius (click)="signInWithEmail()">Sign in</button>
+                  <button type="button" class="btn btn-rounded btn-dark waves-light" mdbRippleRadius (click)="signWithGoogle()">
+                    <i class="fa fa-google"></i> Sign in with Google
+                  </button>
+                </div>
+              </form>
+              <!-- Login form -->
+            </div>
+            <div class="card-footer d-flex flex-row">
+                <div>
+                  <span>Need an account? <a routerLink="/auth/register">Sign up</a></span>
+                </div>
+                <div class="ml-auto">
+                  <span><a (click)="step='reset'">Forgot password?</a></span>
+                </div>
+            </div>
+          </div>
+          <!--/ Login Panel-->
+
+          <!--Reset Panel-->
+          <div class="card mt-2" *ngIf="(step == 'reset')">
+            <div class="card-header bold bg-light">
+              Reset Password
+            </div>
+            <div class="card-body">
+              <!-- Login form -->
+              <form [formGroup]="resetForm">
+                <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="text" id="email" class="form-control" formControlName="email" mdbActive>
+                  <label for="email">Email</label>         
+                  <div class="alert alert-danger" *ngIf="resetForm.controls.email.errors?.not_exists">
+                      Sorry, this email is not found
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn btn-primary btn-rounded waves-light" [disabled]="!resetForm.valid" mdbRippleRadius (click)="sendResetEmail()">Send Reset Email</button>
+                </div>
+              </form>
+              <!-- Login form -->
+            </div>
+            <div class="card-footer d-flex flex-row">
+                <div>
+                  <span>Need an account? <a routerLink="/auth/register">Sign up here</a></span>
+                </div>
+                <div class="ml-auto">
+                  <span><a (click)="step='login'">Sign In</a></span>
+                </div>
+            </div>
+          </div>
+          <!--/ Reset Panel-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+

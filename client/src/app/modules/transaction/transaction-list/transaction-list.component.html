@@ -1,0 +1,97 @@
+  <section>    
+    <div class="container-fluid content-padding">      
+      <div class="d-flex justify-content-end">
+        <div class="mr-auto p-2 btn-group">
+          <h1>Transactions</h1>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-md btn-rounded btn-dark" (click)="_loadRows()">
+            <i class="fa fa-refresh mr-2"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-3">        
+        <div class="col-md-12">
+          <ngx-datatable
+            #transactionsTable
+            class="material rounded"
+            [rows]="rows | async"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50">
+
+            <!-- Row Detail Template --> -->
+          <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+               <div class="row">
+                 <div class="col">
+                  Transaction ID: {{row.ref}}
+                 </div>
+               </div> 
+            </ng-template>
+          </ngx-datatable-row-detail>
+
+           <ngx-datatable-column
+                [width]="30"
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                    href="javascript:void(0)"
+                    [class.datatable-icon-right]="!expanded"
+                    [class.datatable-icon-down]="expanded"
+                    title="Expand/Collapse Row"
+                    (click)="toggleExpandRow(row)">
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+
+          <ngx-datatable-column name="Invoice ID" prop="invoice_number" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Transaction ID" prop="transaction_id" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column> -->
+          <ngx-datatable-column name="Domestic Amount" prop="fiat_amount" [width]="100">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <strong>{{row.fiat_amount | currencyG: row.fiat_currency:'symbol':'1.2'}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Paid Currency" prop="paid_currency" [width]="100">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Paid Amount" prop="paid_amount" [width]="100">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Exchange Rate" prop="exchange_rate" [width]="50">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <strong>{{value}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Date Paid" prop="paid_time" [width]="100">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <strong>{{value | date: 'mediumDate'}}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" prop="status" [width]="100">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <strong>{{getStatus(value)}}</strong>
+            </ng-template>
+          </ngx-datatable-column>          
+        </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </section>

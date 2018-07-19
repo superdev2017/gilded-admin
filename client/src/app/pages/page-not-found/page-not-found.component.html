@@ -1,0 +1,24 @@
+<app-header [navClass]="'gold transparent-dark'"></app-header>
+
+<main>
+  <section class="top-banner">
+    <div class="row">
+      <div class="error-message col-12 card">
+        <div class="card-body d-flex justify-content-center">
+            <label class="alert">
+                <i class="fa fa-exclamation-triangle"></i> Warning! Page or requested URL not found!
+            </label>
+        </div>          
+      </div>
+    </div>
+    <div class="send-button d-flex justify-content-center">
+      <a type="button" routerLink="/" class="btn btn-lg btn-rounded btn-primary waves-light position-relative pl-4 pr-4" mdbRippleRadius>
+        <i class="fa fa-arrow-circle-left mr-2"></i>
+        back to home
+      </a>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>
+

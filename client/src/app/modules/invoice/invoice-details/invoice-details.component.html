@@ -1,0 +1,107 @@
+<div class="card print-invoice" id="print-invoice">
+  <div class="card-body">
+
+    <div class="row company-header" *ngIf="user | async as user">
+      <div class="col-md-12 col-lg-3">
+        <h1>INVOICE</h1>
+      </div>
+      <div class="col-md-12 col-lg-2 offset-lg-2 text-center">
+        <img *ngIf="user.photo && user.photo !== 'assets/images/no-avatar.png'" src="{{user.photo}}" alt="Company Logo">
+      </div>
+      <div class="col-md-12 col-lg-4 offset-lg-1">
+        <p class="mr-4"><span class="company-name">{{user.name}}</span><br><span class="email">{{user.email}}</span></p>
+      </div>
+    </div>
+
+    <div class="row invoice-details">
+      <div class="col sender">
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <span>{{invoice?.invoice_number}}</span>
+        </div>
+        <div class="form-group">
+          <label>Send Date</label>
+          <span>{{invoice?.created_at | date: 'mediumDate'}}</span>
+        </div>
+      </div>
+      <div class="col receiver">
+        <div class="form-group">
+          <label>Contact</label>
+          <span>{{invoice?.client}}</span>
+        </div>
+        <div class="form-group">
+          <label>Date Due</label>
+          <span>{{invoice?.date_due | date: 'mediumDate'}}
+            <span class="badge badge-info invoice-status ml-1">{{getStatus(invoice?.status)}}</span>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row invoice-items">
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Description</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Unit Price</th>
+            <th class="text-right">Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="(invoice && !invoice.items); else itemsData">
+            <td colspan="4">No items found for this invoice</td>
+          </tr>
+          <ng-template #itemsData>
+            <tr *ngFor="let item of invoice.items">
+              <td>{{item.description}}</td>
+              <td class="text-right">{{item.quantity}}</td>
+              <td class="text-right">{{item.unit_price | currencyG: invoice.fiat_currency:'symbol':'1.2'}}</td>
+              <td class="text-right">{{item.amount | currencyG: invoice.fiat_currency:'symbol':'1.2'}}</td>
+            </tr>
+          </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-sm-5 subtotal">
+        <span>Subtotal:</span>
+        <span><input type="text" value="{{subtotal_amount | currencyG: invoice.fiat_currency:'symbol':'1.2'}}" readonly></span>
+      </div>
+    </div>
+
+    <div class="row justify-content-end" *ngIf="invoice.discount">
+      <div class="col-sm-5 tax">
+        <span>Discount %:</span>
+        <span><input type="text" value="{{invoice.discount}}" readonly></span>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-sm-5 amount_due">
+        <span>Amount Due:</span>
+        <span><input type="text" value="{{invoice.total_amount | currencyG: invoice.fiat_currency:'symbol':'1.2'}}" readonly></span>
+      </div>
+    </div>
+
+    <div class="row invoice-footer">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <span>Notes:</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="invoice-notes">{{invoice?.notes}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

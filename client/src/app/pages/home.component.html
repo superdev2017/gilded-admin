@@ -1,0 +1,161 @@
+<app-header [navClass]="'gold transparent-dark'"></app-header>
+
+<main>
+  <section class="top-banner">
+    <div class="row">
+      <div class="d-md-flex flex-md-equal col-8 offset-2 pl-md-3">
+        <div class=" mr-md-3 pt-3 px-3 w-100 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="my-3 py-3">
+            <h1>Send A Crypto Invoice</h1>
+            <p class="lead">Gilded is the easiest way to send invoices and get paid in cryptocurrency.</p>
+          </div>
+          <div class="bg-light box-shadow mx-auto cover-screenshot">
+            <img class="img-fluid" src="/assets/images/screenshots/invoice.png">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="send-button d-flex justify-content-center">
+      <button type="button" routerLink="/auth/register" class="btn btn-lg btn-rounded btn-primary waves-light position-relative pl-4 pr-4" mdbRippleRadius>
+        <i class="fa fa-send mr-2"></i>
+        Send a Crypto Invoice
+      </button>
+    </div>
+  </section>
+
+  <div class="container-fluid pl-0 pr-0">
+
+    <div class="benefits row bg-light pb-4">
+      <div class="col-md-6 col-lg-2 offset-lg-1">
+        <h4 class="m-2">
+          <img class="mr-2 align-bottom" style="height: 30px;" src="/assets/images/ic_check_black_24px.svg">
+          No coding
+        </h4>
+      </div>
+      <div class="col-md-6 col-lg-2">
+        <h4 class="m-2">
+          <img class="mr-2 align-bottom" style="height: 30px;" src="/assets/images/ic_check_black_24px.svg">
+          Secure
+        </h4>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <h4 class="m-2">
+          <img class="mr-2 align-bottom" style="height: 30px;" src="/assets/images/ic_check_black_24px.svg">
+          Accept BTC, ETH, LTC, and NANO
+        </h4>
+      </div>
+      <div class="col-md-6 col-lg-2">
+        <h4 class="m-2">
+          <img class="mr-2 align-bottom" style="height: 30px;" src="/assets/images/ic_check_black_24px.svg">
+          Free to use
+        </h4>
+      </div>
+    </div>
+
+    <div class="wave"></div>
+
+    <section class="revolution-box bg-white text-center">
+      <div class="row mt-4 mb-4 equal">
+        <div class="col-md-5 offset-md-1">
+          <img src="/assets/images/illustrations/invoice.png" class="img-fluid">
+        </div>
+        <div class="col-md-5 h-100 justify-content-center align-self-center">
+          <h1 class="section-heading">Be part of the cryptocurrency revolution</h1>
+          <!--Section description-->
+          <p class="section-description pt-3 mb-0">
+            <b>Digital currency is the currency of the future.</b> <br>
+            Lower fees, a cooperative global workforce, and less reliance on central banking
+            will soon unlock a new age of abundance for humankind.
+          </p>
+
+          <p class="mt-4">
+            <a href="https://medium.com/gilded/why-should-my-business-accept-cryptocurrency-e25a6728c5e3" class="btn btn-flat btn-primary btn-rounded">
+              Why should my business accept cryptocurrency?
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--Section: Features v.3-->
+    <section class="section feature-box bg-light">
+
+        <!--Section heading-->
+        <h1 class="section-heading pt-4">How does it work?</h1>
+        <!--Section description-->
+        <p class="section-description lead grey-text">
+          With Gilded you can send an invoice in traditional (fiat) currency and accept payment in one or more cryptocurrencies.
+          Gilded currently supports Bitcoin, Ethereum, Litecoin, and Nano.
+        </p>
+
+        <!--Grid row-->
+        <div class="row features-small pt-2">
+
+            <!--Grid column-->
+            <div class="col-lg-5 mb-r center-on-small-only">
+                <img src="/assets/images/screenshots/laptop-mockup.png" alt="" class="img-fluid z-depth-0">
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-7">
+
+                <!--Grid row-->
+                <div class="row pb-3">
+                    <div class="col-2 col-md-1">
+                        <i class="fa fa-search gold-text"></i>
+                    </div>
+                    <div class="col-10">
+                        <h5 class="feature-title">1. View invoice</h5>
+                        <p class="grey-text">When your client views an invoice the price will be denominated in fiat currency (USD, EUR, etc).
+                                        The Pay With Crypto button allows the invoice to be paid in crypto.</p>
+                    </div>
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row pb-3">
+                    <div class="col-2 col-md-1">
+                        <i class="fa fa-bitcoin gold-text"></i>
+                    </div>
+                    <div class="col-10">
+                        <h5 class="feature-title">2. Select payment method</h5>
+                        <p class="grey-text">Your client chooses one of your supported crypto payment methods. The price is automatically
+                                        calculated based on the current exchange rate via the CryptoCompare API.</p>
+                    </div>
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row pb-3">
+                    <div class="col-2 col-md-1">
+                        <i class="fa fa-shopping-cart gold-text"></i>
+                    </div>
+                    <div class="col-10">
+                        <h5 class="feature-title">3. Pay</h5>
+                        <p class="grey-text">After paying, your client can click <i>Mark as Paid</i> to let you know the payment is complete.
+                                        Funds are sent straight to your wallet and never pass through Gilded's servers.</p>
+                    </div>
+                </div>
+                <!--Grid row-->
+
+                <p class="mt-4 text-center">
+                  <a href="https://medium.com/gilded/the-strikingly-simple-new-way-to-get-paid-in-cryptocurrency-609ecbd8a80a" class="btn btn-flat btn-primary btn-rounded">
+                    Read our story
+                  </a>
+                </p>
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </section>
+    <!--Section: Features v.3-->
+
+  </div>
+</main>
+
+<app-footer></app-footer>
+

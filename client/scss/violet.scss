@@ -1,0 +1,122 @@
+/**
+  Created violet scss file to keep all applied styles
+  for inputs and buttons with violet style
+ */
+$violet-color: #6938e6;
+
+.body-violet {
+  input[type=text]:focus:not([readonly]),
+  input[type=password]:focus:not([readonly]),
+  input[type=email]:focus:not([readonly]),
+  input[type=url]:focus:not([readonly]),
+  input[type=time]:focus:not([readonly]),
+  input[type=date]:focus:not([readonly]),
+  input[type=datetime-local]:focus:not([readonly]),
+  input[type=tel]:focus:not([readonly]),
+  input[type=number]:focus:not([readonly]),
+  input[type=search-md]:focus:not([readonly]),
+  input[type=search]:focus:not([readonly]),
+  textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid $violet-color;
+    -webkit-box-shadow: 0 1px 0 0 $violet-color;
+    box-shadow: 0 1px 0 0 $violet-color;
+  }
+}
+
+.bg-violet {
+  background: linear-gradient(0deg, #422ed9 0, $violet-color);
+
+  .card-footer {
+    p {
+      color: #909090;
+    }
+  }
+}
+
+.bg-white {
+  color: $violet-color;
+}
+
+.btn-violet-rounded {
+  border: 0;
+  vertical-align: top;
+  padding: 8px 28px;
+  font-size: 17px;
+  background-image: linear-gradient(0deg, #422ed9 0, $violet-color 50%, $violet-color);
+  font-weight: 700;
+  border-radius: 50px;
+  height: 46px;
+  line-height: 30px;
+  color: #fff;
+  background-size: auto 200%;
+  box-shadow: 0 13px 50px rgba(0, 0, 0, .2878);
+  background-position: 0 100%;
+}
+
+.btn-violet-rounded-inverse {
+  border: 0;
+  vertical-align: top;
+  padding: 8px 28px;
+  font-size: 17px;
+  background-color: #fff;
+  font-weight: 700;
+  border-radius: 50px;
+  height: 46px;
+  line-height: 30px;
+  color: $violet-color !important;
+  background-size: auto 200%;
+  -webkit-box-shadow: 0 13px 50px rgba(0, 0, 0, 0.2878);
+  box-shadow: 0 13px 50px rgba(0, 0, 0, 0.2878);
+  background-position: 0 100%;
+}
+
+.icon-violet {
+  background-color: $violet-color;
+    svg path {
+      fill: #fff;
+    }
+}
+.icon-violet-inverse {
+  background-color: #fff;
+    svg path {
+      fill: $violet-color;
+    }
+}
+
+a.link-violet {
+  color: $violet-color;
+}
+a.link-violet:hover {
+  color: #46258d;
+}
+
+.navbar {
+  &.violet {
+    background-color: $violet-color;
+    transition: background-color 300ms linear;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    .nav-link, .nav-link:hover, .navbar-brand {
+      color: #fff;
+    }
+
+    .form-control::placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+
+    .dropdown .dropdown-menu {
+      .dropdown-item {
+        color: $violet-color;
+      }
+      .dropdown-item:hover,
+      .dropdown-item:active {
+        background-color: $violet-color;
+      }
+    }
+  }
+}
+
+.text-sm {
+  font-size: 0.5rem;
+}

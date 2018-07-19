@@ -1,0 +1,86 @@
+@import '../../../../../scss/gold';
+
+.crypto-row {
+  overflow-x: scroll;
+}
+.crypto-row .crypto {
+  background-color: $gold-color;
+  color: #fff;
+  margin: 10px;
+  border-radius: 50px;
+  padding: 10px;
+
+  &:hover {
+    background-color: #e0dbdb;
+    color: $gold-color;
+    cursor: pointer;
+  }
+}
+.crypto-name {
+  font-weight: bold;
+}
+.crypto {
+  height: 60px;
+}
+.crypto-image {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+.crypto-name,
+.crypto-value {
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .crypto-image {
+    left: 30%;
+    top: 5px;
+  }
+  .crypto-name {
+    display: none;
+  }
+  .crypto-value {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+  }
+}
+.edit-actions {
+  display: block;
+  position: absolute;
+  font-size: 1.2em;
+  right: 0;
+  top: 10px;
+  a {
+    padding-left: 10px;
+  }
+}
+
+.user-photo {
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 1px solid grey;
+}
+
+#user_photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+label.active {
+  color: #757575 !important;
+}
+em.note {
+  font-size: 0.8em;
+}
+
+.switch label input[type='checkbox']:checked + .lever-accent {
+  background-color: $light-gold-color !important;
+
+  &::after {
+    background-color: $gold-color !important;
+  }
+}

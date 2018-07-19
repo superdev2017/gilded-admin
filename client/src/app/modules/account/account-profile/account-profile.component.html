@@ -1,0 +1,111 @@
+<main>
+  <section>
+    <div class="container-fluid content-padding">
+      
+      <div class="card mt-4">        
+
+        <div class="card-body">
+            <div class="card-title d-flex flex-row">
+                <h5 class="mt-auto">Manage Profile</h5>
+                <button class="btn btn-rounded btn-md btn-primary ml-auto">
+                  <i>Plan:</i> <b>{{user.plan}}</b>
+                </button>
+            </div>  
+            <hr>  
+            <div class="card-text pt-2">
+              <div class="row mt-4">
+                <div class="col-md-8">
+                  <div class="md-form form-sm">
+                    <span class="edit-actions">
+                      <a class="" (click)="editMode('username')" *ngIf="!edit.username"><i class="fa fa-pencil"></i></a>
+                      <a class="" (click)="cancelValue('username')" *ngIf="edit.username"><i class="fa fa-times"></i></a>
+                      <a class="" (click)="saveValue('username')" *ngIf="edit.username"><i class="fa fa-check"></i></a>
+                    </span>
+                    <input [(ngModel)]="user.username" type="text" class="form-control" id="username" name="username" [disabled]="!edit.username" mdbActive/>
+                    <label for="username" class="active">Username:</label>
+                  </div>
+                  <div class="md-form form-sm">
+                    <span class="edit-actions">
+                      <a class="" (click)="editMode('name')" *ngIf="!edit.name"><i class="fa fa-pencil"></i></a>
+                      <a class="" (click)="cancelValue('name')" *ngIf="edit.name"><i class="fa fa-times"></i></a>
+                      <a class="" (click)="saveValue('name')" *ngIf="edit.name"><i class="fa fa-check"></i></a>
+                    </span>
+                    <input [(ngModel)]="user.name" type="text" class="form-control" id="name" name="name" [disabled]="!edit.name" mdbActive/>
+                    <label for="name" class="active">Name:</label>
+                  </div>
+                  <div class="md-form form-sm">
+                    <span class="edit-actions">
+                      <a class="" (click)="editMode('email')" *ngIf="!edit.email"><i class="fa fa-pencil"></i></a>
+                      <a class="" (click)="cancelValue('email')" *ngIf="edit.email"><i class="fa fa-times"></i></a>
+                      <a class="" (click)="saveValue('email')" *ngIf="edit.email"><i class="fa fa-check"></i></a>
+                    </span>
+                    <input [(ngModel)]="user.email" type="email" class="form-control" id="email" name="email"  [disabled]="!edit.email" mdbActive/>
+                    <label for="email" class="active">Email:</label>
+                  </div>
+                </div>
+                <div class="col-md-3 offset-md-1">
+                  <div class="md-form form-sm">
+                    <img class="user-photo" (click)="userPhoto.click()" src="{{user?.photo}}" alt="Logo/Avatar"/>
+                    <input #userPhoto id="user_photo" type="file" (change)="userPhotoChange($event)" accept="image/x-png,image/gif,image/jpeg" />
+                    <label for="user_photo" class="active">Logo / Avatar</label>
+                  </div>
+                  <em class="note">Max 1 MB in PNG or JPEG format</em>
+                </div>
+              </div>
+
+
+            </div>
+        </div>
+      </div>
+
+      <!-- payment options -->
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="card-title d-flex flex-row">
+              <h5 class="mt-auto">Manage Wallets</h5>
+              <button class="btn btn-rounded btn-md btn-primary ml-auto" routerLink="/payment">
+                <i class="fa fa-cog"></i> Manage
+              </button>
+          </div>            
+        </div>
+      </div>
+            
+      <div class="card mt-4">
+
+        <div class="card-body">
+          <div class="card-title d-flex flex-row">
+            <span>
+                <h5>Manage Password</h5>
+            </span>
+
+            <div class="switch ml-auto" *ngIf="!hasPasswordProvider">
+                <i>Activate Email/Password:</i>
+                <label> 
+                   No <input type="checkbox" [(ngModel)]="showPasswordProvider">
+                  <span class="lever lever-accent"></span>  Yes
+                </label>
+              </div>  
+          </div>
+          <hr> 
+          <div class="card-text mt-4" *ngIf="showPasswordProvider || hasPasswordProvider">
+            <div class="md-form form-sm">
+              <input type="password" class="form-control" id="new_password" mdbActive [(ngModel)]="newPassword"> 
+              <label for="new_password">New Password:</label>
+            </div>
+            <div class="md-form form-sm">
+              <input type="password" class="form-control" id="confirm_password" mdbActive [(ngModel)]="confirmPassword"> 
+              <label for="confirm_password">Confirm Password:</label>
+            </div>
+            <div class="md-form form-sm">
+              <button 
+                class="btn btn-rounded btn-primary"
+                [disabled]="newPassword != confirmPassword || !newPassword"
+                (click)="updatePassword()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>    
+  </section>
+</main>

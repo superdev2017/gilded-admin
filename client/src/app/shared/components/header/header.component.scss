@@ -1,0 +1,65 @@
+@import '../../../../../scss/gold';
+
+.navbar {
+  padding: 10px 30px 10px 30px !important;
+  // background-color: transparent;
+  box-shadow: none !important;
+  z-index: 1;
+
+  &.scrolled {
+    // background-color: $gold-color !important;
+    // transition: background-color 300ms linear;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    .nav-link,
+    .nav-link:hover,
+    .navbar-brand {
+      color: $light-color;
+    }
+
+    .form-control::placeholder {
+      color: $gold-color;
+      opacity: 1;
+    }
+
+    a.nav-link-btn-primary {
+      color: $light-color !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .navbar-toggler-icon i {
+      color: #fff !important;
+    }
+
+    .navbar-collapse.collapse.show {
+      height: 200px !important;
+    }
+    li.nav-item {
+      margin: 0 auto;
+    }
+
+    .nav-flex-icons {
+      flex-direction: column !important;
+      margin: 0 auto;
+    }
+  }
+}
+
+.nav-item,
+.nav-item.avatar {
+  padding-left: 30px !important;
+  font-weight: 500;
+}
+
+a.navbar-brand {
+  font-size: 30px;
+  font-weight: 700;
+}
+.nav-link-btn-primary {
+  margin: auto 50px;
+  font-size: 10pt;
+}
+.nav-logo {
+  max-height: 40px;
+}

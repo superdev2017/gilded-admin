@@ -1,0 +1,38 @@
+<app-header [navClass]="'transparent'"></app-header>
+
+<main class="bg-gold">
+  <section>
+    <div class="container login">
+      <div class="row justify-content-md-center mt-4">
+        <div class="col-md-7">
+          <!--Upgrade Panel-->
+          <div class="card mt-2">
+            <div class="card-header bold bg-light">
+              Upgrade User's Plan
+            </div>
+            <div class="card-body">
+              <!-- Upgrade form -->
+              <form [formGroup]="resetForm">
+                <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="text" id="email" class="form-control" formControlName="email" mdbActive>
+                  <label for="email">Email</label>
+                  <div class="alert alert-danger" *ngIf="resetForm.controls.email.errors?.not_exists">
+                    Sorry, this email is not found
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn btn-primary btn-rounded waves-light" [disabled]="!resetForm.valid" mdbRippleRadius (click)="upgradeUserPlan()">Upgrade to Paid</button>
+                </div>
+              </form>
+              <!-- Upgrade form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+

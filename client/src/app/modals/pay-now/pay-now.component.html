@@ -1,0 +1,104 @@
+<div mdbModal #payNowModal="mdb-modal" [formGroup]="payNowFrom" class="modal fade top" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <!-- modal-header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel" [innerHTML]="title"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="payNowModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <!-- modal-body -->
+      <div class="modal-body mb-0" [ngSwitch]="step">
+           <!-- step 1 -->
+         <section *ngSwitchCase="1">
+             <div class="row">
+                 <div class="col invoice-total">
+                    <label >Invoice Total:
+                        <span>{{invoice.total_amount | currencyG: invoice.fiat_currency:'symbol':'1.2'}}</span>
+                    </label>
+                 </div>
+             </div>
+             <!-- show payment options only if logged user has registered before -->
+             <div class="row mt-4 mb-4" *ngIf="paymentOptions && paymentOptions.length > 0; else noPaymentOptions;">
+                <div class="col text-center">
+                  <!-- show currencies blocks -->
+                  <button *ngFor="let option of paymentOptions" class="btn crypto-button" (click)="payWith(option)">
+                      <img src="{{cryptoImagePath + option.icon + '.png'}}" alt="">
+                      <span class="crypto-title">{{option.currency_name}}</span>
+                      <span>{{cryptoPrices[option.currency] | number: '1.8'}}</span>
+                  </button>
+                </div>                
+             </div>
+         </section>
+            <!-- step 2 -->
+         <section  *ngSwitchCase="2">
+           <div class="row">
+             <div class="col-md-12 col-lg-3 pl-4 pt-2 pb-4" *ngIf="selected_txhash">
+               <qrcode [qrdata]="selected_txhash" [size]="128" [level]="'M'"></qrcode>
+             </div>
+             <div class="col-md-12 col-lg-9 payment-data">
+               <span class="title">Amount to Pay:</span>
+               <div class="price">
+                 <span>{{selected_price | number: '1.8'}} {{selected_currency_code}}</span>
+                 <button class="btn btn-sm btn-flat" (click)="copyAmount(selected_price)">
+                   <i class="fa fa-clipboard mr-1"></i> Copy Amount
+                 </button>
+               </div>
+               <div class="title mt-3">Address to Pay:</div>
+               <div class="txhash">
+                 <span class="wallet-address">{{selected_txhash}}</span>
+                 <button class="btn btn-sm btn-flat" (click)="copyHash(selected_txhash)">
+                    <i class="fa fa-clipboard mr-1"></i> Copy Address
+                 </button>
+               </div>
+             </div>
+           </div>
+           <div class="row mt-4">
+               <div class="col text-center">
+                  <button class="btn btn-rounded btn-primary" (click)="completePayment()" [disabled]="paymentLoading">
+                    <i *ngIf="paymentLoading" class="fa fa-circle-o-notch fa-spin"></i>
+                    Mark as paid
+                  </button>
+               </div>
+           </div>
+         </section>
+          <!-- step nano -->
+         <section  *ngSwitchCase="3">
+            <div class="row">
+              <div class="col">
+                <div class="payment-nano" #nanoButton id="nano-button"></div>
+              </div>
+            </div>
+         </section>
+      </div>
+
+      <!-- modal-footer -->
+      <div class="modal-footer justify-content-between" *ngIf="paymentType == 'normal'">
+          <div [ngSwitch]="step">
+            <div *ngSwitchCase="1">
+              <a href="https://medium.com/gilded/how-to-buy-cryptocurrency-in-10-minutes-1f2ae1606f42" target="_blank">
+                <span class="fa fa-graduation-cap mr-1"></span> How to Buy Cryptocurrency in 10 Minutes
+              </a>
+            </div>
+            <div *ngSwitchCase="2 || 3">
+              <div class="col text-center">
+                <a href="javascript:void(0);" (click)="showStep1()"><i class="fa fa-arrow-left mr-1"></i> Choose a different payment method</a>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            type="button" 
+            class="btn btn-md btn-rounded btn-default waves-light"
+            data-dismiss="modal" 
+            (click)="payNowModal.hide()">Close
+          </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+             

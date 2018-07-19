@@ -1,0 +1,95 @@
+.company-info {
+  float: right;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  width: 300px;
+}
+
+.company-header {
+  margin-bottom: 80px;
+
+  img {
+    max-height: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .company-name {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .email {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+.invoice-details {
+  border: 1px;
+  border-bottom-color: #a7a383;
+  label {
+    margin-bottom: 0;
+  }
+
+  .logo {
+    display: block;
+    height: 50px;
+  }
+
+  .logo img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .form-group label {
+    font-weight: normal;
+  }
+
+  .form-group span {
+    font-weight: bold;
+  }
+
+  .sender .form-group span {
+    float: right;
+  }
+  .receiver .form-group label {
+    float: left;
+  }
+}
+
+.invoice-details > .col:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-footer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.invoice-notes {
+  display: block;
+  border: 1px solid;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  min-height: 100px;
+}
+
+.subtotal,
+.tax,
+.amount_due {
+  display: flex;
+  align-items: center;
+
+  span:nth-child(1) {
+    width: 150px;
+    font-weight: bold;
+  }
+  span:nth-child(2) {
+    width: 200px;
+  }
+  span:nth-child(2) input {
+    text-align: right;
+    padding-left: 10px;
+  }
+}

@@ -1,0 +1,23 @@
+<main>
+  <section *ngIf="invoice | async as invoice" class="pb-4">
+    <div class="container">
+
+      <div class="row mb-2">
+        <div class="col justify-content-start">
+          <button class="btn btn-md btn-rounded btn-default" (click)="backToList()">
+            <i class="fa fa-arrow-left mr-2"></i> Back
+          </button>
+        </div>
+        <div class="col justify-content-end text-right">
+          <span>Share the web invoice with your client:</span>
+          <a class="btn btn-md btn-rounded btn-primary waves-light" [routerLink]="['/invoices', 'share', invoice?.ref]" target="_blank">
+            <i class="fa fa-share mr-2"></i> Web Invoice
+          </a>
+        </div>
+      </div>
+
+      <invoice-details [invoice]="invoice" [context]="'view'"></invoice-details>
+
+    </div>
+  </section>
+</main>

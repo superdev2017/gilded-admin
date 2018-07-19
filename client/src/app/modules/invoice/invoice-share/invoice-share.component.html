@@ -1,0 +1,54 @@
+<main>
+  <section *ngIf="invoice | async as invoice;">    
+    <!-- modal -->
+    <pay-now [show]="showPayNowModal" [invoice]="invoice" (onHide)="showPayNowModal=$event"></pay-now>
+
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col justify-content-end text-right">
+          <button class="btn btn-rounded btn-default" (click)="printInvoice()">
+            <i class="fa fa-print mr-2"></i> Print
+          </button>
+
+          <button *ngIf="(invoice.status != 'pending' && invoice.status != 'confirmed')" 
+              class="btn btn-rounded btn-primary"
+              (click)="payNow()">
+            <i class="fa fa-bitcoin mr-2"></i> Pay With Crypto
+          </button>
+        </div>
+      </div>
+
+      <invoice-details [invoice]="invoice" [context]="'share'"></invoice-details>
+    </div>
+  </section>
+
+  <section *ngIf="!hasInvoice">
+      <div class="d-flex justify-content-center">
+          <div class="col-md-6">              
+            <div class="card card-cascade wider">
+                <!--Card content-->
+                <div class="card-body text-center">
+                    <!--Title-->
+                    <h4 class="card-title"><strong>Invoice Not Found</strong></h4>
+                    
+                    <p class="card-text">
+                        Sorry, we were unable to find this invoice. Please check the link and try again.
+                    </p>
+    
+                    <button class="btn btn-rounded btn-dark" routerLink="/">Home</button>
+    
+                </div>
+                <!--/.Card content-->
+            </div>      
+          </div>
+        </div>  
+  </section>
+
+  <section class="share-footer d-flex justify-content-center align-content-center p-4 text-center">
+    <a href="https://gilded.finance">
+      <img src="/assets/images/logo_black_transparent.png" alt="Gilded Logo" class="mb-2">
+      <br>
+      <span>Send and receive crypto invoices with Gilded</span>
+    </a>
+  </section>
+</main>

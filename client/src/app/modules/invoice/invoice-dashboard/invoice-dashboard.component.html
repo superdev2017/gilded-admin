@@ -1,0 +1,237 @@
+<main>
+  <ngx-loading-bar [color]="'#ffa600'"></ngx-loading-bar>
+  <section *ngIf="hasLoaded && !paymentOptions.length" class="mb-4">
+    <div class="container-fluid content-padding">
+
+      <div class="card card-dark mt-4 mb-4">
+        <div class="card-body">
+          <h3>Welcome to Gilded Invoices</h3>
+
+          <div class="row">
+            <div class="col-md-8">
+              <p>With Gilded you can send an invoice in traditional (fiat) currency and accept payment in Bitcoin, Ethereum, Litecoin, and Nano.</p>
+              <p>To get started, please add the public address of your cryptocurrency wallet(s).</p>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+              <a routerLink="/payment" class="btn btn-primary btn-rounded waves-light ml-3" mdbRippleRadius>Add my wallet address</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="mt-4 mb-4">
+        <h4>What happens when my client receives an invoice?</h4>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col">
+          <div class="card card-cascade">
+            <img src="/assets/images/screenshots/invoice.png" class="img-fluid">
+
+            <div class="card-body">
+              <h4 class="card-title">1. View invoice</h4>
+              <p class="card-text">
+                When your client views an invoice the price will be denominated in domestic currency (USD, EUR, etc).
+                The Pay With Crypto button allows the invoice to be paid in crypto.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card card-cascade">
+            <img src="/assets/images/screenshots/pay-step1.png" class="img-fluid">
+
+            <div class="card-body">
+              <h4 class="card-title">2. Select payment method</h4>
+              <p class="card-text">
+                Your client chooses one of your supported crypto payment methods. The price is automatically
+                determined based on the current exchange rate (via the CryptoCompare API).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card card-cascade">
+            <img src="/assets/images/screenshots/pay-step2.png" class="img-fluid">
+
+            <div class="card-body">
+              <h4 class="card-title">3. Payment</h4>
+              <p class="card-text">
+                After paying, your client can click <i>Mark as Paid</i> to let you know the payment is complete.
+                Funds are sent straight to your wallet and never pass through Gilded's servers.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </section>
+
+  <section *ngIf="hasLoaded && paymentOptions.length" class="mb-4">    
+    <div class="container-fluid content-padding">
+      <div class="d-flex justify-content-end mt-4">
+        <div class="mr-auto p-2 btn-group">
+          <h1>Invoices</h1>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-rounded btn-primary" routerLink="/invoices/create">
+            <i class="fa fa-plus mr-2"></i> New Invoice
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <ngx-datatable
+              #invoicesTable
+              class='material expandable rounded'
+              [rows]="rows | async"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [rowHeight]="'auto'"
+              [footerHeight]="50">
+
+            <!-- Row Detail Template -->
+            <!-- <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Unit Price</th>
+                    <th class="text-right">Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of row.items">
+                    <td>{{item.description}}</td>
+                    <td class="text-right">{{item.quantity}}</td>
+                    <td class="text-right">{{item.unit_price}}</td>
+                    <td class="text-right">{{item.amount}}</td>
+                  </tr>
+                  <tr *ngIf="!row.items">
+                    <td colspan="4">No items found for this invoice</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+            </ngx-datatable-row-detail> -->
+
+            <!-- Column Templates -->
+            <!-- <ngx-datatable-column
+                [width]="50"
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                    href="javascript:void(0)"
+                    [class.datatable-icon-right]="!expanded"
+                    [class.datatable-icon-down]="expanded"
+                    title="Expand/Collapse Row"
+                    (click)="toggleExpandRow(row)">
+                </a>
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="Invoice" prop="invoice_number" [width]="60">
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <span>{{value}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Title" [width]="200">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <p>{{value}}</p>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Client" [width]="150">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <span>{{value}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Amount" prop="total_amount" [width]="100" [cellClass]="getCellClass">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.discount">
+                   <span class="price-discount">
+                     {{row.total_amount + (row.total_amount * row.discount / 100) | currencyG: row.fiat_currency:'symbol':'1.2'}}
+                    </span>
+                   <span>{{row.total_amount | currencyG: row.fiat_currency:'symbol':'1.2'}}</span>
+                </span>
+                <span *ngIf="!row.discount">{{row.total_amount | currencyG: row.fiat_currency:'symbol':'1.2'}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Date Due" prop="date_due" [width]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <span>{{value | date: 'mediumDate'}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Created Date" prop="created_at" [width]="120">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <span>{{value | date: 'mediumDate'}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Status" [width]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <span>{{getStatus(value)}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+                [title]="'Actions'"
+                [width]="130"
+                [resizeable]="false"
+                [sortable]="false"
+                [draggable]="false"
+                [canAutoResize]="false">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a
+                    href="javascript:void(0)"
+                    class="fa fa-share-alt mr-3"
+                    title="Share Invoice"
+                    target="_blank"
+                    [routerLink]="['/invoices/share', row.ref]">
+                </a>
+                <a
+                    href="javascript:void(0)"
+                    class="fa fa-file mr-3"
+                    title="View Invoice"
+                    [routerLink]="['/invoices/view', row.ref]">
+                </a>
+                <!-- @TODO: Enable this once we have dynamic URLs (we can't hardcode the dev URL into the modal) -->
+                <!--<a *ngIf="row.status == 'unpaid'"-->
+                   <!--href="javascript:void(0)"-->
+                   <!--class="fa fa-share-alt share-invoice"-->
+                   <!--title="Share Invoice"-->
+                   <!--(click)="shareInvoice(row)">-->
+                <!--</a>-->
+                <a *ngIf="(row.status != 'pending' || row.status != 'confirmed')"
+                   href="javascript:void(0);"
+                   type="button"
+                   title="Edit Invoice"
+                   class="fa fa-pencil"
+                   [routerLink]="['/invoices/edit', row.ref]"></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-transaction-list *ngIf="hasLoaded && paymentOptions.length"></app-transaction-list>
+</main>

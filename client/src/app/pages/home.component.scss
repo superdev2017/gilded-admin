@@ -1,0 +1,89 @@
+@import 'scss/gold';
+
+a,
+main,
+h1,
+h2 {
+  color: #fff !important;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+main {
+  height: auto;
+  background-color: $dark-color;
+  background-image: url(/assets/images/climpek-pattern.png);
+  padding-bottom: 0;
+}
+
+.navbar.gold {
+  background-color: transparent;
+}
+
+.bg-light,
+.bg-white h1,
+.section-heading {
+  color: $dark-color !important;
+}
+
+.cover-screenshot {
+  overflow: hidden;
+  width: 80%;
+  max-height: 300px;
+}
+
+.send-button {
+  height: 0;
+  .btn {
+    margin: -25px 0;
+  }
+}
+
+.benefits {
+  color: $dark-color;
+  padding-top: 70px;
+}
+
+// Wave
+
+.wave {
+  text-align: center;
+  background: linear-gradient(to bottom, $light-color, $light-color);
+  height: 50px;
+  position: relative;
+}
+
+.wave::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-repeat: repeat-x;
+  height: 10px;
+  background-size: 20px 20px;
+  background-image: radial-gradient(circle at 10px -5px, transparent 12px, white 13px);
+}
+
+.wave::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-repeat: repeat-x;
+  height: 15px;
+  background-size: 40px 20px;
+  background-image: radial-gradient(circle at 10px 15px, white 12px, transparent 13px);
+}
+
+.section {
+  padding: 80px;
+}
+
+.revolution-box {
+  padding-bottom: 80px;
+  padding-top: 40px;
+}

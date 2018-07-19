@@ -1,0 +1,257 @@
+<app-header #header (toggleSidebar)="toggleSidebar($event)"></app-header>
+
+<main>
+
+  <section class="bg-light">
+    <div class="container-fluid">
+      <div class="row pt-2">
+          <div class="sidebar" [ngClass]="{'sidebar-open': showSidebar}">
+            <!-- @TODO: search filters using "facets" feature of elasticsearch -->
+            <div class="filter-header">
+              <span>Filters</span>
+              <span class="btn-close" (click)="toggleSidebar(false)">Close</span>
+            </div>
+            <div class="filter">
+              <h5>Currency</h5>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/btc@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox1">
+                <label class="form-check-label" for="checkbox1">
+                  Bitcoin
+                </label>
+              </div>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/eth@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox2">
+                <label class="form-check-label" for="checkbox2">
+                  Ethereum
+                </label>
+              </div>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/ltc@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox4">
+                <label class="form-check-label" for="checkbox4">
+                  Litecoin
+                </label>
+              </div>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/dash@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox5">
+                <label class="form-check-label" for="checkbox5">
+                  Dash
+                </label>
+              </div>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/xmr@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox6">
+                <label class="form-check-label" for="checkbox6">
+                  Monero
+                </label>
+              </div>
+              <div class="form-group">
+                <img class="icon-currency pull-right" src="assets/images/currencies/32@2x/black/xrb@2x.png">
+                <input mdbDeepDirective type="checkbox" id="checkbox3">
+                <label class="form-check-label" for="checkbox3">
+                  Nano
+                </label>
+              </div>
+            </div>
+
+            <h5>Price</h5>
+
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">
+                <i class="fa fa-dollar prefix"></i>
+              </span>
+              <input type="number" id="minprice" class="form-control-sm" placeholder="Min" size="8">
+            </div>
+
+            <div class="input-group input-group-sm mt-2 mb-3">
+              <span class="input-group-addon">
+                <i class="fa fa-dollar prefix"></i>
+              </span>
+              <input type="number" id="maxprice" class="form-control-sm" placeholder="Max" size="8">
+            </div>
+
+            <h5 class="mt-4">Brand</h5>
+
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox9320">
+              <label class="form-check-label" for="checkbox2">
+                adidas
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox9210">
+              <label class="form-check-label" for="checkbox2">
+                JanSport
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox9520">
+              <label class="form-check-label" for="checkbox2">
+                L.L. Bean
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox92220">
+              <label class="form-check-label" for="checkbox2">
+                Nike
+              </label>
+            </div>
+
+            <h5 class="mt-4">Type</h5>
+
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbo1x9520">
+              <label class="form-check-label" for="checkbox2">
+                Backpacking
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox3922120">
+              <label class="form-check-label" for="checkbox2">
+                School
+              </label>
+            </div>
+
+            <h5 class="mt-4">Department</h5>
+
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbo1x91520">
+              <label class="form-check-label" for="checkbox2">
+                Kids'
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox3924220">
+              <label class="form-check-label" for="checkbox2">
+                Men's
+              </label>
+            </div>
+            <div class="form-group">
+              <input mdbDeepDirective type="checkbox" id="checkbox3926220">
+              <label class="form-check-label" for="checkbox2">
+                Women's
+              </label>
+            </div>
+
+          </div>
+
+        <!--// col-md-10-->
+          <div class="col-md-12 product-list">
+
+            <!-- SEARCH BAR -->
+            <div class="row mb-4">
+              <div class="col-md-12 justify-content-center">
+                <form [formGroup]="queryForm">
+                  <div class="md-form bg-white search-box border rounded">
+                    <i class="fa fa-search prefix"></i>
+                    <input type="text" class="form-control" formControlName="query">
+                    <i class="fa fa-sliders toggle-filter" [ngClass]="{'filter-open': showSidebar}" (click)="toggleSidebar($event)"></i>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- END SEARCH BAR -->
+
+            <div class="d-flex justify-content-center" *ngIf="searchComplete && !searchError && (searchRunning || results.length > 0)">
+              <h5 class="pt-1">Your search returned {{totalResults}} results</h5>
+
+              <pagination-controls
+                                    class="paging"
+                                    (pageChange)="pageChanged($event)"
+                                    maxSize="7"
+                                    autohide="true"
+                                    screenReaderPaginationLabel="Pagination"
+                                    screenReaderPageLabel="page"
+                                    screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+            </div>
+
+            <div class="row mt-4 results" *ngIf="searchComplete && !searchError && results.length">
+
+              <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let result of results | paginate: { itemsPerPage: pageSize, currentPage: curPage, totalItems: totalResults }">
+
+                <a [href]="result._source.url" (click)="trackClick(result._source.url)" target="_blank">
+                  <div class="card result-item">
+
+                    <!--Card image-->
+                    <div class="avatar mx-auto">
+                        <img [src]="result._source.image" class="img-responsive" alt="">
+                    </div>
+                    <!--/.Card image-->
+
+                    <div class="card-body d-flex flex-column">
+                      <h3 class="item-title card-title text-center">{{result._source.name | truncate : 50 : true}}</h3>
+                      <p class="item-web text-center">{{showDomain(result._source.url)}}</p>
+                      <p class="item-text card-text">{{result._source.description}}</p>
+                    </div>
+                    <!--/Card-body-->
+
+                    <!--Card footer-->
+                    <div class="card-footer d-flex flex-row align-items-center">
+                      <span class="item-price">
+                        {{result._source.price | currencyG: result._source.currency:'symbol':'1.2' }}
+                        <!-- @TODO: Display discount if available -->
+                        <!-- <span class="discount">(discount)</span> -->
+                      </span>
+                      <!-- @TODO: Implement supported currency options and price conversion -->
+                      <!-- Make sure to use discounted price if available. The discount is based on the discount percentage specified in Elastic. -->
+                      <span class="ml-auto item-currencies">
+                        <a mdbTooltip="Bitcoin ~ 0.00001250 (1,250 satoshis)" placement="bottom"
+                          triggers="mouseenter:mouseleave">
+                          <img alt="Bitcoin ~ 0.00001250 (1,250 satoshis)" class="icon-currency"
+                              src="assets/images/currencies/32@2x/black/btc@2x.png">
+                        </a>
+                        <a mdbTooltip="Ethereum ~ 0.481" placement="bottom" triggers="mouseenter:mouseleave">
+                          <img alt="Ethereum ~ 0.481" class="icon-currency"
+                              src="assets/images/currencies/32@2x/black/eth@2x.png">
+                        </a>
+                        <a mdbTooltip="Litecoin ~ 3.79059" placement="bottom" triggers="mouseenter:mouseleave">
+                          <img alt="Litecoin ~ 3.79059" class="icon-currency"
+                              src="assets/images/currencies/32@2x/black/ltc@2x.png">
+                        </a>
+                      </span>
+                    </div>
+
+                  </div>
+                </a>
+                <!--/.Card-->
+              </div>
+
+            </div>
+
+            <div class="d-flex justify-content-center" *ngIf="results.length">
+              <pagination-controls
+                                    class="paging mt-4"
+                                    (pageChange)="pageChanged($event)"
+                                    maxSize="7"
+                                    autohide="true"
+                                    screenReaderPaginationLabel="Pagination"
+                                    screenReaderPageLabel="page"
+                                    screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+            </div>
+
+            <div *ngIf="searchComplete && !searchError && !searchRunning && results.length === 0" class="no-results d-flex align-items-center justify-content-center flex-column">
+              <div>
+                <img src="assets/images/illustrations/online-store.png">
+              </div>
+              <h1>No results found</h1>
+              <p>Please try your search again</p>
+            </div>
+
+            <div *ngIf="searchError" class="no-results d-flex align-items-center justify-content-center flex-column">
+              <h1>Error :-(</h1>
+              <p>Sorry, we were unable to complete your search</p>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="clear-fix"></div>
+
+</main>
